@@ -1,5 +1,6 @@
 package com.example.test.clone;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.SerializationUtils;
 
 public class FooTest {
@@ -17,5 +18,11 @@ public class FooTest {
         byte[] bytes = SerializationUtils.serialize(foo);
         Foo foo2 = SerializationUtils.deserialize(bytes);
         System.out.println(foo2.getPerson().getAge() +"p2");
+
+        // fastJson 可以实现序列化测试
+        String fooStr = JSON.toJSONString(foo);
+        System.out.println(fooStr);
+        Foo foo3 = JSON.parseObject(fooStr, Foo.class);
+        System.out.println("object" + foo3.getPerson().getAge());
     }
 }
