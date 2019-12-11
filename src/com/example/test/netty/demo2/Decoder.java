@@ -17,29 +17,16 @@ public class Decoder extends ReplayingDecoder<Void>{
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         System.out.println("decode invoke count "+(++count));
-        int size = in.readInt();
-        byte[] data = new byte[size];
+        byte type = in.readByte();
+        byte serial = in.readByte();
+        in.markReaderIndex();
+        int size = in.readByte(); // size -> int
+        byte[] data = new byte[size+1]; // 这里是加上 bean 的长度那个字节
+        in.resetReaderIndex();
         in.readBytes(data);
-        FooProto foo = new FooProto();
-        foo.length = size;
-        foo.bytes = data;
-        out.add(foo);
 
-    }
-    // 存在内存泄漏
-    private boolean decode() {
-        int beforePos = os.position();
-        try {
-
-            int type = os.unmarshalUInt();
-            int serial = os.unmarshalInt();
-            Houzhenguo houzhenguo = new Houzhenguo();
-            houzhenguo.unmarshal(os);
-            System.out.println(houzhenguo.toString());
-        }catch (Exception e) {
-            os.setPosition(beforePos);
-            return false;
-        }
-        return true;
+        Houzhenguo houzhenguo= new Houzhenguo();
+        houzhenguo.unmarshal(OctetsStream.wrap(data));
+        out.add(houzhenguo);
     }
 }

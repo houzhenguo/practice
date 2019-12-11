@@ -1,5 +1,6 @@
 package com.example.test.netty.demo2;
 
+import com.example.test.netty.Houzhenguo;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -10,11 +11,11 @@ import java.util.UUID;
  *  自定义的Handler
  */
 
-public class MyServerHandler extends SimpleChannelInboundHandler<FooProto> {
+public class MyServerHandler extends SimpleChannelInboundHandler<Houzhenguo> {
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, FooProto msg) throws Exception {
-        System.out.println("server length "+ msg.length);
-        System.out.println("server bytes" + new String(msg.bytes));
+    protected void channelRead0(ChannelHandlerContext ctx, Houzhenguo msg) throws Exception {
+        System.out.println("server recv value1  "+ msg.getValue1());
+        System.out.println("server recv value2  "+ msg.getValue2());
     }
 
     @Override
