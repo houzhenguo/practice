@@ -16,6 +16,7 @@ public class MyServerHandler extends SimpleChannelInboundHandler<Houzhenguo> {
     protected void channelRead0(ChannelHandlerContext ctx, Houzhenguo msg) throws Exception {
         System.out.println("server recv value1  "+ msg.getValue1());
         System.out.println("server recv value2  "+ msg.getValue2());
+        System.out.println("server recv value3  "+ msg.getValue3());
     }
 
     @Override

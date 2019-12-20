@@ -17,14 +17,31 @@ public class Decoder extends ReplayingDecoder<Void>{
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
 
-        System.out.println("decode invoke count "+(++count));
+        // test
+        int cap = in.capacity();
 
+
+        in.markReaderIndex(); // mark begin
+        int re = in.readInt();
+        int read = in.readerIndex();
+        int write = in.writerIndex();
+        byte[] b = new byte[write - read];
+        in.readBytes(b);
+        OctetsStream os1 = OctetsStream.wrap(b);
+        in.resetReaderIndex();  // reset mark
+        // test
+        System.out.println("decode invoke count "+(++count));
 
         byte type = in.readByte();
         byte serial = in.readByte();
+        
 
-        in.markReaderIndex();
+        //test
+
+        //test
+
         // 处理头部被压缩的问题
+        in.markReaderIndex();
         byte[] headdata = new byte[4]; // 这里需要的修改，不能写死。 这个可以放在外面 4个字节为最大长度
         in.readBytes(headdata);
         in.resetReaderIndex();

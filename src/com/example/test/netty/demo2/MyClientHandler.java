@@ -26,6 +26,7 @@ public class MyClientHandler extends SimpleChannelInboundHandler<String> {
             Houzhenguo houzhenguo = new Houzhenguo();
             houzhenguo.setValue1(12+i);
             houzhenguo.setValue2(33+i);
+            houzhenguo.setValue3("好好学习，天天向上！！！！！！！！！");
             ctx.writeAndFlush(houzhenguo);
         }
 

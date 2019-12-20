@@ -18,8 +18,9 @@ public class Test {
 
         // Test 序列化以及反序列化
         Houzhenguo h = new Houzhenguo();
-        h.setValue1(666);
-        h.setValue2(23);
+        h.setValue1(11);
+        h.setValue2(33);
+        h.setValue3("好好学习天天向上");
         BeanCodec codec = new BeanCodec();
         boolean f=  codec.decodeProtocol(codec.enCode(h));
 
