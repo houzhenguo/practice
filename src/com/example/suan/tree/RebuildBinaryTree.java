@@ -1,4 +1,4 @@
-package com.example.suan;
+package com.example.suan.tree;
 import java.util.*;
 
 public class RebuildBinaryTree {
