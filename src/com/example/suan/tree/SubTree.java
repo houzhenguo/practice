@@ -20,6 +20,27 @@ public class SubTree {
         if (r1 == null || r1.val != r2.val) { // 当前 r1没有点了，但是r2有点，说明 r1不够了，返回 false
             return false;
         }
-        return isPart(r1.left, r2.left) && isPart(r1.right, r1.right); // 递归的查找 左右子树
+        return isPart(r1.left, r2.left) && isPart(r1.right, r2.right); // 递归的查找 左右子树
+    }
+
+    // 以下是自己手写版本
+    // 判断 root2 是否是 root1 的子结构
+    public static boolean subTree(TreeNode root1, TreeNode root2) {
+        if (root1 == null || root2 == null) {
+            return false;
+        }
+        if (isPartTree(root1, root2)) {
+            return true;
+        }
+        return subTree(root1.left, root2) || subTree(root1.right, root2);
+    }
+    public static boolean isPartTree(TreeNode root1, TreeNode root2) {
+        if (root2 == null) {
+            return true;
+        }
+        if (root1 == null || root1.val != root2.val) {
+            return false;
+        }
+        return isPartTree(root1.left, root2.left) && isPartTree(root1.right, root2.right);
     }
 }

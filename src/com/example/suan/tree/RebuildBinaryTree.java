@@ -71,6 +71,48 @@ public class RebuildBinaryTree {
         return result;
     }
 
+    public static List<Integer> preOrderTraversal(TreeNode node) {
+        // 根 左 右
+        List<Integer> result = new ArrayList<>();
+        if(node == null) {
+            return result;
+        }
+        Stack<TreeNode> stack = new Stack();
+        stack.push(node);
+        while(!stack.isEmpty()) {
+            TreeNode n = stack.pop();
+            if (n != null) {
+                result.add(n.val);
+                stack.push(n.right);
+                stack.push(n.left);
+            }
+        }
+        return result;
+    }
+
+    public static List<Integer> inOrder(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if(root == null) {
+            return result;
+        }
+        Stack<TreeNode> stack = new Stack();
+
+        TreeNode cur = root;
+        while(cur != null || !stack.isEmpty()){
+            while(cur != null) {
+                stack.push(cur);
+                cur  = cur.left;
+            }
+            TreeNode n = stack.pop();
+            if (n != null) {
+                result.add(n.val);
+                cur = n.right;
+            }
+        }
+        return result;
+
+    }
+
     /**
      *  镜像反转
      * @param root
@@ -112,7 +154,11 @@ public class RebuildBinaryTree {
 
         TreeNode root = reBuildBinaryTree(preOrder, inOrder); // 构建 二叉树
         List<Integer> result = postOrderTraversal(root); // 后续遍历 （题目1）
-        result.forEach(System.out::println); // 7,4,2,5,8,6,3,1
+       // result.forEach(System.out::println); // 7,4,2,5,8,6,3,1
+
+        // preOrder
+        List<Integer> preRes = inOrder(root);
+        preRes.forEach(System.out::println);
 
         // 镜像反转 测试
         TreeNode mirrorNodeRoot = mirrorReverse(root);
