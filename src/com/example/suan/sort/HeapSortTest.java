@@ -2,6 +2,10 @@ package com.example.suan.sort;
 
 public class HeapSortTest {
 
+    // 完全二叉树 -> 顺序； 堆 父节点 > 两个子节点
+    // 堆顶元素一定是最大的，所以将 对顶元素与 末尾元素交换，砍断 。剩余的继续最 heapify ，又得到第二大的
+    // 构建堆的目的是因为只有堆顶元素有用，是最大的。
+
     // parent = (i -1)/2
     public static void main(String[] args) {
         int[] nums = {2,5,3,1,10,4};
@@ -14,7 +18,7 @@ public class HeapSortTest {
      *  对于调整下来的原 父节点 进行递归的heapify
      *  (因为既然被调下来，一定是小数，需要继续往下调整)
      * @param nums 调整的数组
-     * @param n 数组的长度
+     * @param n  节点的个数，在最后 将 堆顶元素 与 最后一个元素交换，砍断的时候 ，节点的个数会减少.
      * @param i 需要调整的节点 i
      */
     public static void heapify(int[] nums, int n, int i) {
