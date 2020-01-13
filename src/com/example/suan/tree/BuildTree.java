@@ -1,6 +1,8 @@
 package com.example.suan.tree;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,13 +16,22 @@ public class BuildTree {
         int[] pre = {1,2,4,7,3,5,6,8};
         int[] inorder = {4,7,2,1,5,3,8,6};
         Node root = rebuildTree(pre, inorder);
+       //postOrderPrint(root);
+//        List<Integer> res = new ArrayList<>();
+//        lujing(root, res, 6);
+//        res.forEach(System.out::println);
+
+
+        Node newNode = mirrorNewTree(root);
+        postOrderPrint(newNode);
+        System.out.println("--------------");
         postOrderPrint(root);
 
 //        Node mirrorRoot = mirrorTree(root);
 //        postOrderPrint(mirrorRoot);
 
-        Node resNode = findNextNodeInOrder(root);
-        System.out.println(resNode.val);
+//        Node resNode = findNextNodeInOrder(root);
+//        System.out.println(resNode.val);
     }
 
     public static Node rebuildTree(int[] preOrder, int[] inOrder) {
@@ -83,6 +94,9 @@ public class BuildTree {
             this.val = val;
             this.parent = parent;
         }
+        public Node(int val) {
+            this.val = val;
+        }
     }
 
     // TODO : 题目三
@@ -107,5 +121,30 @@ public class BuildTree {
 
     // 判断一个 树是否是另外一个树的子结构
 
+    // 输出根节点 到 某个节点的路径
+
+    public static boolean lujing(Node node, List<Integer> list, int target) {
+        if (node == null) {
+            return false;
+        }
+
+        if (lujing(node.left, list, target) || lujing(node.right,list,target) || node.val == target) {
+            list.add(node.val);
+            return true;
+        }
+        return false;
+    }
+
+    public static Node mirrorNewTree(Node root) {
+        if (root == null) {
+            return null;
+        }
+        Node node = new Node(root.val);
+        node.left = root.right;
+        node.right = root.left;
+        mirrorNewTree(node.left);
+        mirrorNewTree(node.right);
+        return node;
+    }
 
 }

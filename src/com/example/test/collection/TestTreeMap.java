@@ -12,7 +12,7 @@ public class TestTreeMap {
         map.put(4, "4i");
         map.put(9, "9i");
         SortedMap sortedMap = map.tailMap(5);
-        map.headMap(2);
+        //map.headMap(2);
         sortedMap.values().forEach(System.out::println); // 输出比5大的
 
     }
