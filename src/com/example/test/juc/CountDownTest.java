@@ -15,6 +15,7 @@ public class CountDownTest {
             try {
                 Thread.sleep(5000);
                 latch.countDown();
+                System.out.println("测试是否阻塞");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
